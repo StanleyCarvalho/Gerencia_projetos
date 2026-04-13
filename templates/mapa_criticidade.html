@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Mapa de Criticidade | PMO Project Management Office{% endblock %}
+
+{% block header_actions %}
+<a href="/dashboard" class="btn btn-outline-light btn-sm">Voltar ao Dashboard</a>
+<a href="/projetos" class="btn btn-outline-light btn-sm">Lista de Projetos</a>
+<a href="/logout" class="btn btn-danger btn-sm">Sair</a>
+{% endblock %}
+
+{% block content %}
+<section class="glass-card p-4 mb-4">
+    <h2 class="section-title">Mapa de Criticidade</h2>
+    <p class="section-subtitle">Classificação visual por risco e prioridade para foco executivo.</p>
+    <p class="criteria-note mt-2 mb-0">
+        Regra de criticidade: <strong>{{ criterio_critico }}</strong>
+    </p>
+</section>
+
+<section class="row g-3 mb-4">
+    <div class="col-md-6 col-xl-3">
+        <article class="metric-card metric-critical h-100">
+            <p class="metric-label">Risco Alto</p>
+            <h3 class="metric-value metric-danger">{{ risco_alto }}</h3>
+        </article>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <article class="metric-card h-100">
+            <p class="metric-label">Risco Médio</p>
+            <h3 class="metric-value">{{ risco_medio }}</h3>
+        </article>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <article class="metric-card h-100">
+            <p class="metric-label">Prioridade Alta/Crítica</p>
+            <h3 class="metric-value metric-danger">{{ prioridade_alta }}</h3>
+        </article>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <article class="metric-card h-100">
+            <p class="metric-label">Prioridade Média/Baixa</p>
+            <h3 class="metric-value">{{ prioridade_media + prioridade_baixa }}</h3>
+        </article>
+    </div>
+</section>
+
+<section class="glass-card p-4">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <h3 class="section-title mb-0">Projetos por Faixa de Criticidade</h3>
+        <a href="/projetos?filtro=criticos" class="btn btn-outline-light btn-sm">Ver Apenas Críticos</a>
+    </div>
+    <div class="table-responsive mt-3">
+        <table class="table table-dark-modern table-striped align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Projeto</th>
+                    <th>Faixa</th>
+                    <th>Status</th>
+                    <th>Progresso</th>
+                    <th>Prioridade</th>
+                    <th>Risco</th>
+                    <th>Custo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in projetos %}
+                <tr>
+                    <td>{{ p[0] }}</td>
+                    <td>{{ p[1] }}</td>
+                    <td>
+                        {% if p[7] == "critico" %}
+                        <span class="badge bg-danger-subtle text-danger-emphasis">Crítico</span>
+                        {% else %}
+                        <span class="badge bg-secondary-subtle text-secondary-emphasis">Monitoramento</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ p[2] or "-" }}</td>
+                    <td>{{ p[3] or 0 }}%</td>
+                    <td>{{ p[4] or "-" }}</td>
+                    <td>{{ p[5] or "-" }}</td>
+                    <td>R$ {{ "{:,.2f}".format((p[6] or 0)|float).replace(",", "X").replace(".", ",").replace("X", ".") }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8" class="text-center text-secondary py-4">Nenhum projeto encontrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

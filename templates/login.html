@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Login | PMO Project Management Office{% endblock %}
+
+{% block content %}
+<section class="auth-container">
+    <article class="glass-card auth-card">
+        <h2 class="section-title text-center">Acesso ao Sistema</h2>
+        <p class="section-subtitle text-center mb-4">Painel profissional para gestão do PMO</p>
+
+        <form method="POST">
+            <div class="mb-3">
+                <input class="form-control" type="email" name="email" placeholder="E-mail corporativo" required>
+            </div>
+            <div class="mb-3">
+                <input class="form-control" type="password" name="senha" placeholder="Senha" required>
+            </div>
+            <button class="btn btn-primary w-100">Entrar</button>
+        </form>
+    </article>
+</section>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Projetos | PMO Project Management Office{% endblock %}
+
+{% block header_actions %}
+<a href="/projetos/novo" class="btn btn-primary btn-sm">Novo Projeto</a>
+<a href="/dashboard" class="btn btn-outline-light btn-sm">Voltar ao Dashboard</a>
+<a href="/logout" class="btn btn-danger btn-sm">Sair</a>
+{% endblock %}
+
+{% block content %}
+<section class="glass-card p-4 mb-4">
+    <h2 class="section-title">Gestão de Projetos Estratégicos</h2>
+    <p class="section-subtitle">Visualização e monitoramento dos projetos cadastrados.</p>
+    {% if filtro == "criticos" %}
+    <p class="criteria-note mt-2 mb-0">
+        Exibindo somente projetos críticos com base em: <strong>{{ criterio_critico }}</strong>
+    </p>
+    {% elif filtro == "ativos" %}
+    <p class="criteria-note mt-2 mb-0">
+        Exibindo somente projetos ativos (progresso menor que 100%).
+    </p>
+    {% elif filtro == "total" %}
+    <p class="criteria-note mt-2 mb-0">
+        Exibindo todos os projetos cadastrados.
+    </p>
+    {% endif %}
+    <div class="d-flex gap-2 flex-wrap mt-3">
+        <a href="/projetos/novo" class="btn btn-primary btn-sm">Cadastrar Novo Projeto</a>
+        <a href="/mapa-criticidade" class="btn btn-outline-light btn-sm">Abrir Mapa de Criticidade</a>
+    </div>
+</section>
+
+<section class="glass-card p-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 list-header-row">
+        <h3 class="section-title mb-0">{{ titulo_lista }}</h3>
+        <div class="d-flex gap-2 flex-wrap">
+            <a href="/projetos?filtro=total" class="btn btn-outline-light btn-sm">Todos</a>
+            <a href="/projetos?filtro=ativos" class="btn btn-outline-light btn-sm">Ativos</a>
+            <a href="/projetos?filtro=criticos" class="btn btn-outline-light btn-sm">Somente Críticos</a>
+            <a href="/portfolio" class="btn btn-primary btn-sm">Gerar Portfólio</a>
+            <a href="/mapa-criticidade" class="btn btn-outline-light btn-sm">Mapa de Criticidade</a>
+        </div>
+    </div>
+
+    <div class="table-responsive mt-3">
+        <table class="table table-dark-modern table-striped align-middle mb-0 project-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Status</th>
+                    <th>Progresso</th>
+                    <th>Custo</th>
+                    <th>Prioridade</th>
+                    <th>Risco</th>
+                    <th>Área</th>
+                    <th>Gerente</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in projetos %}
+                <tr>
+                    <td>{{ p[0] }}</td>
+                    <td>{{ p[1] }}</td>
+                    <td>{{ p[5] or "-" }}</td>
+                    <td>{{ p[2] }}%</td>
+                    <td>R$ {{ "{:,.2f}".format((p[4] or 0)|float).replace(",", "X").replace(".", ",").replace("X", ".") }}</td>
+                    <td>{{ p[3] or "-" }}</td>
+                    <td>{{ p[8] or "-" }}</td>
+                    <td>{{ p[6] or "-" }}</td>
+                    <td>{{ p[7] or "-" }}</td>
+                    <td>
+                        <div class="d-flex gap-2 flex-wrap project-actions">
+                            <a href="/projetos/{{ p[0] }}" class="btn btn-sm btn-outline-light">Ver</a>
+                            <a href="/analisar/{{ p[0] }}" class="btn btn-sm btn-primary">IA</a>
+                            <form method="POST" action="/projetos/excluir/{{ p[0] }}" onsubmit="return confirm('Deseja excluir este projeto?');">
+                                <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="10" class="text-center text-secondary py-4">Nenhum projeto cadastrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

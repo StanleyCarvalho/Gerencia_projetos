@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | PMO Project Management Office{% endblock %}
+
+{% block header_actions %}
+<a href="/logout" class="btn btn-danger btn-sm">Sair</a>
+{% endblock %}
+
+{% block content %}
+<section class="glass-card p-4 mb-4">
+    <h2 class="section-title">Dashboard Executivo</h2>
+    <p class="section-subtitle">Visão rápida dos indicadores do portfólio estratégico.</p>
+    <p class="criteria-note mt-2 mb-0">
+        Base de classificação de projeto crítico: <strong>{{ criterio_critico }}</strong>
+    </p>
+</section>
+
+<section class="row g-3 mb-4">
+    <div class="col-md-4">
+        <a href="/projetos?filtro=total" class="metric-link">
+            <article class="metric-card metric-total h-100">
+                <p class="metric-label">Total de Projetos</p>
+                <h3 class="metric-value metric-primary">{{ total_projetos }}</h3>
+            </article>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="/projetos?filtro=ativos" class="metric-link">
+            <article class="metric-card metric-active h-100">
+                <p class="metric-label">Projetos Ativos</p>
+                <h3 class="metric-value metric-success">{{ projetos_ativos }}</h3>
+            </article>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="/projetos?filtro=criticos" class="metric-link">
+            <article class="metric-card metric-critical h-100">
+                <p class="metric-label">Projetos Críticos</p>
+                <h3 class="metric-value metric-danger">{{ projetos_criticos }}</h3>
+            </article>
+        </a>
+    </div>
+</section>
+
+<section class="row g-3 mb-4">
+    <div class="col-md-4">
+        <article class="metric-card h-100">
+            <p class="metric-label">Progresso Médio do Portfólio</p>
+            <h3 class="metric-value">{{ progresso_medio }}%</h3>
+        </article>
+    </div>
+    <div class="col-md-4">
+        <article class="metric-card h-100">
+            <p class="metric-label">Custo Total Estimado</p>
+            <h3 class="metric-value">{{ custo_total }}</h3>
+        </article>
+    </div>
+    <div class="col-md-4">
+        <article class="metric-card h-100">
+            <p class="metric-label">Projetos Estáveis (&gt;=70%)</p>
+            <h3 class="metric-value">{{ projetos_estaveis }}</h3>
+        </article>
+    </div>
+</section>
+
+<div class="d-flex gap-2 flex-wrap">
+    <a href="/projetos" class="btn btn-primary">Gerenciar Projetos</a>
+    <a href="/projetos/novo" class="btn btn-primary">Novo Projeto</a>
+    <a href="/portfolio" class="btn btn-primary">Gerar Portfólio</a>
+    <a href="/mapa-criticidade" class="btn btn-outline-light">Abrir Mapa de Criticidade</a>
+</div>
+{% endblock %}

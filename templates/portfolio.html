@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block title %}Portfólio | PMO Project Management Office{% endblock %}
+
+{% block header_actions %}
+<a href="/dashboard" class="btn btn-outline-light btn-sm">Voltar ao Dashboard</a>
+<a href="/logout" class="btn btn-danger btn-sm">Sair</a>
+{% endblock %}
+
+{% block content %}
+<div class="portfolio-layout">
+<section class="glass-card p-4 mb-4">
+    <h2 class="section-title">Resumo do Portfólio</h2>
+    <p class="section-subtitle">Visão consolidada dos projetos atuais para apoio à decisão executiva.</p>
+    <p class="criteria-note mt-2 mb-0">
+        Critério de criticidade adotado: <strong>{{ criterio_critico }}</strong>
+    </p>
+</section>
+
+<section class="row g-3 mb-4">
+    <div class="col-md-3">
+        <article class="metric-card h-100">
+            <p class="metric-label">Total de Projetos</p>
+            <h3 class="metric-value metric-primary">{{ total_projetos }}</h3>
+        </article>
+    </div>
+    <div class="col-md-3">
+        <article class="metric-card h-100">
+            <p class="metric-label">Projetos Ativos</p>
+            <h3 class="metric-value metric-success">{{ projetos_ativos }}</h3>
+        </article>
+    </div>
+    <div class="col-md-3">
+        <article class="metric-card h-100">
+            <p class="metric-label">Projetos Críticos</p>
+            <h3 class="metric-value metric-danger">{{ projetos_criticos }}</h3>
+        </article>
+    </div>
+    <div class="col-md-3">
+        <article class="metric-card h-100">
+            <p class="metric-label">Progresso Médio</p>
+            <h3 class="metric-value">{{ progresso_medio }}%</h3>
+        </article>
+    </div>
+</section>
+
+<section class="glass-card p-4 mb-4">
+    <h3 class="section-title">Resumo Gerado</h3>
+    <p class="analysis-highlight mb-0">{{ resumo_portfolio }}</p>
+    <p class="criteria-note mt-3 mb-0">Custo total estimado do portfólio: <strong>{{ custo_total }}</strong></p>
+</section>
+
+<section class="row g-3 mb-4">
+    <div class="col-lg-4">
+        <article class="glass-card p-4 h-100">
+            <h3 class="section-title">Distribuição por Status</h3>
+            <div class="table-responsive mt-3">
+                <table class="table table-dark-modern table-striped align-middle mb-0 status-resumo-table">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Quantidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for s in por_status %}
+                        <tr>
+                            <td>{{ s[0] }}</td>
+                            <td>{{ s[1] }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="2" class="text-center text-secondary py-4">Sem dados de status.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </article>
+    </div>
+    <div class="col-lg-8">
+        <article class="glass-card p-4 h-100">
+            <h3 class="section-title">Distribuição por Área Estratégica</h3>
+            <div class="table-responsive mt-3">
+                <table class="table table-dark-modern table-striped align-middle mb-0 area-resumo-table">
+                    <thead>
+                        <tr>
+                            <th>Área</th>
+                            <th>Qtd.</th>
+                            <th>Custo Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in por_area %}
+                        <tr>
+                            <td>{{ a[0] }}</td>
+                            <td>{{ a[1] }}</td>
+                            <td><span class="moeda-nowrap">R$&nbsp;{{ "{:,.2f}".format((a[2] or 0)|float).replace(",", "X").replace(".", ",").replace("X", ".") }}</span></td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="3" class="text-center text-secondary py-4">Sem dados por área.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </article>
+    </div>
+</section>
+
+<section class="glass-card p-4 mb-4">
+    <h3 class="section-title">Projetos Mais Críticos (Top 5)</h3>
+    <div class="table-responsive mt-3">
+        <table class="table table-dark-modern table-striped align-middle mb-0 top-criticos-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Status</th>
+                    <th>Progresso</th>
+                    <th>Prioridade</th>
+                    <th>Risco</th>
+                    <th>Custo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in top_criticos %}
+                <tr>
+                    <td>{{ p[0] }}</td>
+                    <td>{{ p[1] }}</td>
+                    <td>{{ p[2] or "-" }}</td>
+                    <td>{{ p[3] or 0 }}%</td>
+                    <td>{{ p[4] or "-" }}</td>
+                    <td>{{ p[5] or "-" }}</td>
+                    <td>R$ {{ "{:,.2f}".format((p[6] or 0)|float).replace(",", "X").replace(".", ",").replace("X", ".") }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7" class="text-center text-secondary py-4">Sem projetos críticos no momento.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="glass-card p-4">
+    <h3 class="section-title">Detalhamento Completo dos Projetos</h3>
+    <p class="section-subtitle">Visão detalhada de cada projeto com score e faixa de criticidade.</p>
+    <div class="table-responsive mt-3">
+        <table class="table table-dark-modern table-striped align-middle mb-0 portfolio-detalhe-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Projeto</th>
+                    <th>Status</th>
+                    <th>Progresso</th>
+                    <th>Custo</th>
+                    <th>Prioridade</th>
+                    <th>Risco</th>
+                    <th>Área</th>
+                    <th>Gerente</th>
+                    <th>Início</th>
+                    <th>Fim</th>
+                    <th>Faixa</th>
+                    <th>Score</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in portfolio_detalhado %}
+                <tr>
+                    <td>{{ p[0] }}</td>
+                    <td title="{{ p[1] }}">
+                        {{ (p[1][:40] ~ "...") if p[1] and (p[1]|length > 40) else p[1] }}
+                    </td>
+                    <td>{{ p[2] }}</td>
+                    <td>{{ p[3] }}%</td>
+                    <td>R$ {{ "{:,.2f}".format((p[4] or 0)|float).replace(",", "X").replace(".", ",").replace("X", ".") }}</td>
+                    <td>{{ p[5] }}</td>
+                    <td>{{ p[6] }}</td>
+                    <td title="{{ p[7] }}">
+                        {{ (p[7][:28] ~ "...") if p[7] and (p[7]|length > 28) else p[7] }}
+                    </td>
+                    <td>{{ p[8] }}</td>
+                    <td>{{ p[9] }}</td>
+                    <td>{{ p[10] }}</td>
+                    <td>{{ p[12] }}</td>
+                    <td>{{ p[13] }}</td>
+                    <td><a href="/projetos/{{ p[0] }}" class="btn btn-outline-light btn-sm">Ver Projeto</a></td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="14" class="text-center text-secondary py-4">Nenhum projeto encontrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+</div>
+{% endblock %}
