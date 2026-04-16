@@ -7,9 +7,10 @@
 {% endblock %}
 
 {% block content %}
-<section class="glass-card p-4 mb-4">
-    <div class="d-flex flex-wrap gap-3 justify-content-between align-items-center">
+<section class="glass-card page-hero mb-4">
+    <div class="hero-content d-flex flex-wrap gap-3 justify-content-between align-items-center">
         <div>
+            <p class="hero-kicker">Inteligência de Portfólio</p>
             <h2 class="section-title mb-1">Painel de Decisão Inteligente</h2>
             <p class="section-subtitle mb-0">
                 Projeto: <strong>{{ projeto_nome }}</strong> |
@@ -24,42 +25,36 @@
     </div>
 </section>
 
-{% if analise.aviso %}
-<section class="glass-card p-3 mb-4 analysis-warning">
-    <strong>Aviso:</strong> {{ analise.aviso }}
-</section>
-{% endif %}
-
 <section class="row g-3 mb-4">
     <div class="col-6 col-lg-3">
-        <article class="kpi-card">
-            <p class="kpi-label">Score Geral</p>
-            <h3 class="kpi-value">{{ analise.metricas.score }}</h3>
+        <article class="stat-card">
+            <p class="stat-label">Score Geral</p>
+            <h3 class="stat-value">{{ analise.metricas.score }}</h3>
         </article>
     </div>
     <div class="col-6 col-lg-3">
-        <article class="kpi-card">
-            <p class="kpi-label">Situação</p>
-            <h3 class="kpi-value kpi-{{ analise.metricas.situacao_color }}">{{ analise.metricas.situacao }}</h3>
+        <article class="stat-card">
+            <p class="stat-label">Situação</p>
+            <h3 class="stat-value kpi-{{ analise.metricas.situacao_color }}">{{ analise.metricas.situacao }}</h3>
         </article>
     </div>
     <div class="col-6 col-lg-3">
-        <article class="kpi-card">
-            <p class="kpi-label">Risco Geral</p>
-            <h3 class="kpi-value">{{ analise.metricas.risco_geral }}%</h3>
+        <article class="stat-card">
+            <p class="stat-label">Risco Geral</p>
+            <h3 class="stat-value">{{ analise.metricas.risco_geral }}%</h3>
         </article>
     </div>
     <div class="col-6 col-lg-3">
-        <article class="kpi-card">
-            <p class="kpi-label">Confiança</p>
-            <h3 class="kpi-value">{{ analise.metricas.confianca }}%</h3>
+        <article class="stat-card">
+            <p class="stat-label">Confiança</p>
+            <h3 class="stat-value">{{ analise.metricas.confianca }}%</h3>
         </article>
     </div>
 </section>
 
 <section class="row g-3 mb-4">
     <div class="col-lg-7">
-        <article class="glass-card p-4 h-100">
+        <article class="panel-card h-100">
             <h3 class="section-title">Mapa de Performance</h3>
             <p class="section-subtitle">Visão multidimensional para apoiar priorização executiva.</p>
             <div class="chart-wrap mt-3">
@@ -68,7 +63,7 @@
         </article>
     </div>
     <div class="col-lg-5">
-        <article class="glass-card p-4 h-100">
+        <article class="panel-card h-100">
             <h3 class="section-title">Riscos por Pilar</h3>
             <p class="section-subtitle">Quanto maior a barra, maior a necessidade de mitigação.</p>
             <div class="chart-wrap mt-3">
@@ -80,7 +75,7 @@
 
 <section class="row g-3">
     <div class="col-lg-7">
-        <article class="glass-card p-4 h-100">
+        <article class="panel-card h-100">
             <h3 class="section-title">Recomendação Executiva</h3>
             <p class="analysis-highlight mt-2">{{ analise.metricas.recomendacao }}</p>
             <p class="section-subtitle mt-3 mb-0">Tendência: <strong>{{ analise.metricas.tendencia }}</strong></p>
@@ -88,7 +83,7 @@
         </article>
     </div>
     <div class="col-lg-5">
-        <article class="glass-card p-4 h-100">
+        <article class="panel-card h-100">
             <h3 class="section-title">Ações Prioritárias</h3>
             <ul class="action-list mt-3 mb-0">
                 {% for acao in analise.acoes_recomendadas %}
@@ -113,8 +108,8 @@
                     datasets: [{
                         label: "Performance",
                         data: chartData.radar_values,
-                        borderColor: "#9cd77a",
-                        backgroundColor: "rgba(156, 215, 122, 0.22)",
+                        borderColor: "#1f5fae",
+                        backgroundColor: "rgba(31, 95, 174, 0.2)",
                         borderWidth: 2
                     }]
                 },
@@ -125,11 +120,11 @@
                         r: {
                             min: 0,
                             max: 100,
-                            grid: { color: "rgba(210, 228, 184, 0.2)" },
-                            angleLines: { color: "rgba(210, 228, 184, 0.2)" },
-                            pointLabels: { color: "#d9e8c7", font: { size: 12 } },
+                            grid: { color: "rgba(115, 139, 168, 0.25)" },
+                            angleLines: { color: "rgba(115, 139, 168, 0.25)" },
+                            pointLabels: { color: "#284664", font: { size: 12 } },
                             ticks: {
-                                color: "#b7c8a2",
+                                color: "#3f5d7a",
                                 backdropColor: "transparent",
                                 stepSize: 20
                             }
@@ -149,7 +144,7 @@
                     datasets: [{
                         label: "Nível de Risco",
                         data: chartData.risco_values,
-                        backgroundColor: ["#c37f65", "#c99f5c", "#ba875f"],
+                        backgroundColor: ["#d77d40", "#ce9a2f", "#b45f4a"],
                         borderRadius: 10
                     }]
                 },
@@ -157,12 +152,12 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        x: { ticks: { color: "#d7e6c4" }, grid: { display: false } },
+                        x: { ticks: { color: "#2d4a67" }, grid: { display: false } },
                         y: {
                             min: 0,
                             max: 100,
-                            ticks: { color: "#b8c8a4", stepSize: 20 },
-                            grid: { color: "rgba(210, 228, 184, 0.18)" }
+                            ticks: { color: "#3f5d7a", stepSize: 20 },
+                            grid: { color: "rgba(115, 139, 168, 0.22)" }
                         }
                     },
                     plugins: { legend: { display: false } }

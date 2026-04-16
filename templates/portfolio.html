@@ -9,52 +9,55 @@
 
 {% block content %}
 <div class="portfolio-layout">
-<section class="glass-card p-4 mb-4">
-    <h2 class="section-title">Resumo do Portfólio</h2>
-    <p class="section-subtitle">Visão consolidada dos projetos atuais para apoio à decisão executiva.</p>
-    <p class="criteria-note mt-2 mb-0">
-        Critério de criticidade adotado: <strong>{{ criterio_critico }}</strong>
-    </p>
+<section class="glass-card page-hero mb-4">
+    <div class="hero-content">
+        <p class="hero-kicker">Consolidação PMO</p>
+        <h2 class="section-title">Resumo do Portfólio</h2>
+        <p class="section-subtitle">Visão consolidada dos projetos atuais para apoio à decisão executiva.</p>
+        <p class="criteria-note mt-2 mb-0">
+            Critério de criticidade adotado: <strong>{{ criterio_critico }}</strong>
+        </p>
+    </div>
 </section>
 
 <section class="row g-3 mb-4">
     <div class="col-md-3">
-        <article class="metric-card h-100">
-            <p class="metric-label">Total de Projetos</p>
-            <h3 class="metric-value metric-primary">{{ total_projetos }}</h3>
+        <article class="stat-card h-100">
+            <p class="stat-label">Total de Projetos</p>
+            <h3 class="stat-value metric-primary">{{ total_projetos }}</h3>
         </article>
     </div>
     <div class="col-md-3">
-        <article class="metric-card h-100">
-            <p class="metric-label">Projetos Ativos</p>
-            <h3 class="metric-value metric-success">{{ projetos_ativos }}</h3>
+        <article class="stat-card h-100">
+            <p class="stat-label">Projetos Ativos</p>
+            <h3 class="stat-value metric-success">{{ projetos_ativos }}</h3>
         </article>
     </div>
     <div class="col-md-3">
-        <article class="metric-card h-100">
-            <p class="metric-label">Projetos Críticos</p>
-            <h3 class="metric-value metric-danger">{{ projetos_criticos }}</h3>
+        <article class="stat-card h-100">
+            <p class="stat-label">Projetos Críticos</p>
+            <h3 class="stat-value metric-danger">{{ projetos_criticos }}</h3>
         </article>
     </div>
     <div class="col-md-3">
-        <article class="metric-card h-100">
-            <p class="metric-label">Progresso Médio</p>
-            <h3 class="metric-value">{{ progresso_medio }}%</h3>
+        <article class="stat-card h-100">
+            <p class="stat-label">Progresso Médio</p>
+            <h3 class="stat-value">{{ progresso_medio }}%</h3>
         </article>
     </div>
 </section>
 
-<section class="glass-card p-4 mb-4">
+<section class="panel-card mb-4">
     <h3 class="section-title">Resumo Gerado</h3>
-    <p class="analysis-highlight mb-0">{{ resumo_portfolio }}</p>
+    <p class="analysis-highlight mt-2 mb-0">{{ resumo_portfolio }}</p>
     <p class="criteria-note mt-3 mb-0">Custo total estimado do portfólio: <strong>{{ custo_total }}</strong></p>
 </section>
 
 <section class="row g-3 mb-4">
     <div class="col-lg-4">
-        <article class="glass-card p-4 h-100">
+        <article class="panel-card h-100">
             <h3 class="section-title">Distribuição por Status</h3>
-            <div class="table-responsive mt-3">
+            <div class="table-shell table-responsive mt-3">
                 <table class="table table-dark-modern table-striped align-middle mb-0 status-resumo-table">
                     <thead>
                         <tr>
@@ -70,7 +73,7 @@
                         </tr>
                         {% else %}
                         <tr>
-                            <td colspan="2" class="text-center text-secondary py-4">Sem dados de status.</td>
+                            <td colspan="2" class="py-4"><div class="empty-state">Sem dados de status.</div></td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -79,9 +82,9 @@
         </article>
     </div>
     <div class="col-lg-8">
-        <article class="glass-card p-4 h-100">
+        <article class="panel-card h-100">
             <h3 class="section-title">Distribuição por Área Estratégica</h3>
-            <div class="table-responsive mt-3">
+            <div class="table-shell table-responsive mt-3">
                 <table class="table table-dark-modern table-striped align-middle mb-0 area-resumo-table">
                     <thead>
                         <tr>
@@ -99,7 +102,7 @@
                         </tr>
                         {% else %}
                         <tr>
-                            <td colspan="3" class="text-center text-secondary py-4">Sem dados por área.</td>
+                            <td colspan="3" class="py-4"><div class="empty-state">Sem dados por área.</div></td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -109,9 +112,9 @@
     </div>
 </section>
 
-<section class="glass-card p-4 mb-4">
+<section class="panel-card mb-4">
     <h3 class="section-title">Projetos Mais Críticos (Top 5)</h3>
-    <div class="table-responsive mt-3">
+    <div class="table-shell table-responsive mt-3">
         <table class="table table-dark-modern table-striped align-middle mb-0 top-criticos-table">
             <thead>
                 <tr>
@@ -137,7 +140,7 @@
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="7" class="text-center text-secondary py-4">Sem projetos críticos no momento.</td>
+                    <td colspan="7" class="py-4"><div class="empty-state">Sem projetos críticos no momento.</div></td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -145,10 +148,10 @@
     </div>
 </section>
 
-<section class="glass-card p-4">
+<section class="panel-card">
     <h3 class="section-title">Detalhamento Completo dos Projetos</h3>
     <p class="section-subtitle">Visão detalhada de cada projeto com score e faixa de criticidade.</p>
-    <div class="table-responsive mt-3">
+    <div class="table-shell table-responsive mt-3">
         <table class="table table-dark-modern table-striped align-middle mb-0 portfolio-detalhe-table">
             <thead>
                 <tr>
@@ -192,7 +195,7 @@
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="14" class="text-center text-secondary py-4">Nenhum projeto encontrado.</td>
+                    <td colspan="14" class="py-4"><div class="empty-state">Nenhum projeto encontrado.</div></td>
                 </tr>
                 {% endfor %}
             </tbody>

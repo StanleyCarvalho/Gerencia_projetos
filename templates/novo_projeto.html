@@ -9,87 +9,113 @@
 {% endblock %}
 
 {% block content %}
-<section class="glass-card p-4 mb-4">
-    <h2 class="section-title">Novo Projeto</h2>
-    <p class="section-subtitle">Cadastro dedicado de projeto com informações estratégicas do portfólio.</p>
+<section class="glass-card page-hero mb-4">
+    <div class="hero-content">
+        <p class="hero-kicker">Cadastro PMO</p>
+        <h2 class="section-title">Novo Projeto</h2>
+        <p class="section-subtitle">Cadastro dedicado de projeto com informações estratégicas do portfólio.</p>
+    </div>
 </section>
 
-<section class="glass-card p-4 mb-4">
+<section class="panel-card mb-4">
     <form method="POST" class="row g-3 mt-1">
-        <div class="col-lg-4">
-            <label class="form-label">Nome do Projeto</label>
-            <input class="form-control" name="nome" placeholder="Ex.: SISFROM Fase 2" minlength="3" maxlength="140" required>
-        </div>
-        <div class="col-lg-2">
-            <label class="form-label">Progresso (%)</label>
-            <input class="form-control" name="progresso" type="number" min="0" max="100" step="0.1" placeholder="0 a 100" required>
-        </div>
-        <div class="col-lg-2">
-            <label class="form-label">Custo Estimado</label>
-            <input class="form-control" id="custo" name="custo" placeholder="0,00" inputmode="decimal" autocomplete="off" required>
-        </div>
-        <div class="col-lg-2">
-            <label class="form-label">Prioridade</label>
-            <select class="form-control" name="prioridade" required>
-                <option value="">Selecionar</option>
-                <option value="baixa">Baixa</option>
-                <option value="media">Média</option>
-                <option value="alta">Alta</option>
-                <option value="critica">Crítica</option>
-            </select>
-        </div>
-        <div class="col-lg-2">
-            <label class="form-label">Status</label>
-            <select class="form-control" name="status" required>
-                <option value="planejado">Planejado</option>
-                <option value="execucao">Execução</option>
-                <option value="atrasado">Atrasado</option>
-                <option value="concluido">Concluído</option>
-                <option value="cancelado">Cancelado</option>
-            </select>
-        </div>
-
-        <div class="col-lg-3">
-            <label class="form-label">Área Estratégica</label>
-            <input class="form-control" name="area_estrategica" placeholder="Defesa, TI, Operações...">
-        </div>
-        <div class="col-lg-3">
-            <label class="form-label">Gerente Responsável</label>
-            <input class="form-control" name="gerente_responsavel" placeholder="Nome do gerente">
-        </div>
-        <div class="col-lg-3">
-            <label class="form-label">Patrocinador</label>
-            <input class="form-control" name="patrocinador" placeholder="Diretoria / Sponsor">
-        </div>
-        <div class="col-lg-3">
-            <label class="form-label">Risco</label>
-            <select class="form-control" name="risco_nivel" required>
-                <option value="baixo">Baixo</option>
-                <option value="medio" selected>Medio</option>
-                <option value="alto">Alto</option>
-            </select>
-        </div>
-
-        <div class="col-lg-3">
-            <label class="form-label">Início Previsto</label>
-            <input class="form-control" type="date" name="data_inicio_prevista">
-        </div>
-        <div class="col-lg-3">
-            <label class="form-label">Fim Previsto</label>
-            <input class="form-control" type="date" name="data_fim_prevista">
-        </div>
-        <div class="col-lg-6">
-            <label class="form-label">Benefício Esperado</label>
-            <input class="form-control" name="beneficio_esperado" maxlength="600" placeholder="Impacto esperado no negócio">
+        <div class="col-12">
+            <div class="field-group">
+                <h3 class="field-title">Dados Principais</h3>
+                <div class="row g-3">
+                    <div class="col-lg-4">
+                        <label class="form-label">Nome do Projeto</label>
+                        <input class="form-control" name="nome" placeholder="Ex.: SISFROM Fase 2" minlength="3" maxlength="140" required>
+                    </div>
+                    <div class="col-lg-2">
+                        <label class="form-label">Progresso (%)</label>
+                        <input class="form-control" name="progresso" type="number" min="0" max="100" step="0.1" placeholder="0 a 100" required>
+                    </div>
+                    <div class="col-lg-2">
+                        <label class="form-label">Custo Estimado</label>
+                        <input class="form-control" id="custo" name="custo" placeholder="0,00" inputmode="decimal" autocomplete="off" required>
+                    </div>
+                    <div class="col-lg-2">
+                        <label class="form-label">Prioridade</label>
+                        <select class="form-control" name="prioridade" required>
+                            <option value="">Selecionar</option>
+                            <option value="baixa">Baixa</option>
+                            <option value="media">Média</option>
+                            <option value="alta">Alta</option>
+                            <option value="critica">Crítica</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2">
+                        <label class="form-label">Status</label>
+                        <select class="form-control" name="status" required>
+                            <option value="planejado">Planejado</option>
+                            <option value="execucao">Execução</option>
+                            <option value="atrasado">Atrasado</option>
+                            <option value="concluido">Concluído</option>
+                            <option value="cancelado">Cancelado</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="col-12">
-            <label class="form-label">Descrição Executiva</label>
-            <textarea class="form-control" name="descricao" rows="3" maxlength="1600" placeholder="Escopo, premissas, restrições e observações relevantes"></textarea>
+            <div class="field-group">
+                <h3 class="field-title">Contexto Estratégico</h3>
+                <div class="row g-3">
+                    <div class="col-lg-3">
+                        <label class="form-label">Área Estratégica</label>
+                        <input class="form-control" name="area_estrategica" placeholder="Defesa, TI, Operações...">
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="form-label">Gerente Responsável</label>
+                        <input class="form-control" name="gerente_responsavel" placeholder="Nome do gerente">
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="form-label">Patrocinador</label>
+                        <input class="form-control" name="patrocinador" placeholder="Diretoria / Sponsor">
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="form-label">Risco</label>
+                        <select class="form-control" name="risco_nivel" required>
+                            <option value="baixo">Baixo</option>
+                            <option value="medio" selected>Medio</option>
+                            <option value="alto">Alto</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="col-md-3">
-            <button class="btn btn-primary w-100">Salvar Projeto</button>
+        <div class="col-12">
+            <div class="field-group">
+                <h3 class="field-title">Prazos e Resultado</h3>
+                <div class="row g-3">
+                    <div class="col-lg-3">
+                        <label class="form-label">Início Previsto</label>
+                        <input class="form-control" type="date" name="data_inicio_prevista">
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="form-label">Fim Previsto</label>
+                        <input class="form-control" type="date" name="data_fim_prevista">
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-label">Benefício Esperado</label>
+                        <input class="form-control" name="beneficio_esperado" maxlength="600" placeholder="Impacto esperado no negócio">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Descrição Executiva</label>
+                        <textarea class="form-control" name="descricao" rows="3" maxlength="1600" placeholder="Escopo, premissas, restrições e observações relevantes"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-actions">
+                <button class="btn btn-primary">Salvar Projeto</button>
+                <a href="/projetos" class="btn btn-outline-light">Cancelar</a>
+            </div>
         </div>
     </form>
 </section>
