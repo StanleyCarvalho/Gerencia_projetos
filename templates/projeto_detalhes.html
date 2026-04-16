@@ -8,47 +8,50 @@
 {% endblock %}
 
 {% block content %}
-<section class="glass-card p-4 mb-4">
-    <h2 class="section-title">Visão Completa do Projeto</h2>
-    <p class="section-subtitle">Base para tomada de decisão estratégica e acompanhamento executivo.</p>
+<section class="glass-card page-hero mb-4">
+    <div class="hero-content">
+        <p class="hero-kicker">Monitoramento Executivo</p>
+        <h2 class="section-title">Visão Completa do Projeto</h2>
+        <p class="section-subtitle">Base para tomada de decisão estratégica e acompanhamento executivo.</p>
+    </div>
 </section>
 
 <section class="row g-3 mb-4">
-    <div class="col-lg-3"><article class="kpi-card"><p class="kpi-label">ID</p><h3 class="kpi-value">{{ projeto[0] }}</h3></article></div>
-    <div class="col-lg-3"><article class="kpi-card"><p class="kpi-label">Status</p><h3 class="kpi-value">{{ projeto[5] or "-" }}</h3></article></div>
-    <div class="col-lg-3"><article class="kpi-card"><p class="kpi-label">Prioridade</p><h3 class="kpi-value">{{ projeto[3] or "-" }}</h3></article></div>
-    <div class="col-lg-3"><article class="kpi-card"><p class="kpi-label">Risco</p><h3 class="kpi-value">{{ projeto[11] or "-" }}</h3></article></div>
+    <div class="col-lg-3"><article class="stat-card"><p class="stat-label">ID</p><h3 class="stat-value">{{ projeto[0] }}</h3></article></div>
+    <div class="col-lg-3"><article class="stat-card"><p class="stat-label">Status</p><h3 class="stat-value">{{ projeto[5] or "-" }}</h3></article></div>
+    <div class="col-lg-3"><article class="stat-card"><p class="stat-label">Prioridade</p><h3 class="stat-value">{{ projeto[3] or "-" }}</h3></article></div>
+    <div class="col-lg-3"><article class="stat-card"><p class="stat-label">Risco</p><h3 class="stat-value">{{ projeto[11] or "-" }}</h3></article></div>
 </section>
 
-<section class="glass-card p-4 mb-4">
+<section class="panel-card mb-4">
     <h3 class="section-title">{{ projeto[1] }}</h3>
-    <div class="row g-3 mt-1">
-        <div class="col-md-3"><span class="detail-label">Progresso</span><div class="detail-value">{{ projeto[2] }}%</div></div>
-        <div class="col-md-3"><span class="detail-label">Custo Estimado</span><div class="detail-value">{{ custo_formatado }}</div></div>
-        <div class="col-md-3"><span class="detail-label">Área Estratégica</span><div class="detail-value">{{ projeto[6] or "-" }}</div></div>
-        <div class="col-md-3"><span class="detail-label">Gerente</span><div class="detail-value">{{ projeto[7] or "-" }}</div></div>
-        <div class="col-md-3"><span class="detail-label">Patrocinador</span><div class="detail-value">{{ projeto[8] or "-" }}</div></div>
-        <div class="col-md-3"><span class="detail-label">Início Previsto</span><div class="detail-value">{{ projeto[9] or "-" }}</div></div>
-        <div class="col-md-3"><span class="detail-label">Fim Previsto</span><div class="detail-value">{{ projeto[10] or "-" }}</div></div>
+    <div class="detail-grid soft-divider">
+        <article class="detail-chip"><span class="detail-label">Progresso</span><div class="detail-value">{{ projeto[2] }}%</div></article>
+        <article class="detail-chip"><span class="detail-label">Custo Estimado</span><div class="detail-value">{{ custo_formatado }}</div></article>
+        <article class="detail-chip"><span class="detail-label">Área Estratégica</span><div class="detail-value">{{ projeto[6] or "-" }}</div></article>
+        <article class="detail-chip"><span class="detail-label">Gerente</span><div class="detail-value">{{ projeto[7] or "-" }}</div></article>
+        <article class="detail-chip"><span class="detail-label">Patrocinador</span><div class="detail-value">{{ projeto[8] or "-" }}</div></article>
+        <article class="detail-chip"><span class="detail-label">Início Previsto</span><div class="detail-value">{{ projeto[9] or "-" }}</div></article>
+        <article class="detail-chip"><span class="detail-label">Fim Previsto</span><div class="detail-value">{{ projeto[10] or "-" }}</div></article>
     </div>
 </section>
 
 <section class="row g-3">
     <div class="col-lg-6">
-        <article class="glass-card p-4 h-100">
+        <article class="panel-card h-100">
             <h3 class="section-title">Benefício Esperado</h3>
             <p class="analysis-highlight mt-2">{{ projeto[12] or "Não informado." }}</p>
         </article>
     </div>
     <div class="col-lg-6">
-        <article class="glass-card p-4 h-100">
+        <article class="panel-card h-100">
             <h3 class="section-title">Descrição Executiva</h3>
             <p class="analysis-highlight mt-2">{{ projeto[13] or "Não informada." }}</p>
         </article>
     </div>
 </section>
 
-<section class="glass-card p-4 mt-4">
+<section class="panel-card mt-4">
     <h3 class="section-title">Histórico do Projeto</h3>
     <div class="row g-3 mt-1">
         <div class="col-md-4">
