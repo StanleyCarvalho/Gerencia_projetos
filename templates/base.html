@@ -5,21 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}PMO Project Management Office{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="app-shell">
-    <header class="topbar py-3">
-        <div class="container d-flex align-items-center justify-content-between gap-3">
-            <div class="d-flex align-items-center gap-3">
-                <img src="{{ url_for('static', filename='logo-exercito.png') }}" alt="Logo Exército Brasileiro" class="brand-logo">
-                <div>
-                    <h1 class="brand-title">PMO Project Management Office</h1>
-                    <p class="brand-subtitle">MVP - Minimum Viable Product</p>
+    <header class="topbar py-3 py-lg-4">
+        <div class="container">
+            <div class="topbar-main">
+                <div class="d-flex align-items-center gap-3">
+                    <img src="{{ url_for('static', filename='logo-exercito.png') }}" alt="Logo Exército Brasileiro" class="brand-logo">
+                    <div>
+                        <h1 class="brand-title">PMO Project Management Office</h1>
+                        <p class="brand-subtitle">Governança, priorização e entrega estratégica</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 flex-wrap justify-content-end header-actions">
+                    {% block header_actions %}{% endblock %}
                 </div>
             </div>
-            <div class="d-flex gap-2">
-                {% block header_actions %}{% endblock %}
+            {% if session.get("user") %}
+            <nav class="quick-nav mt-3">
+                <a href="/dashboard" class="quick-link">Dashboard</a>
+                <a href="/projetos" class="quick-link">Projetos</a>
+                <a href="/portfolio" class="quick-link">Portfólio</a>
+                <a href="/mapa-criticidade" class="quick-link">Mapa de Criticidade</a>
+                <a href="/projetos/novo" class="quick-link">Novo Projeto</a>
+            </nav>
+            <div class="status-strip mt-3">
+                <span>Painel profissional para acompanhamento do portfólio PMO em tempo real.</span>
             </div>
+            {% endif %}
         </div>
     </header>
 
@@ -38,7 +55,7 @@
 
     <footer class="app-footer">
         <div class="container footer-inner">
-            <span>Sistema- PMO-Desevolvido por Stanley</span>
+            <span>Sistema PMO - Desenvolvido por Stanley</span>
             <a href="https://github.com/StanleyCarvalho" target="_blank" rel="noopener noreferrer">github.com/StanleyCarvalho</a>
         </div>
     </footer>

@@ -3,20 +3,39 @@
 {% block title %}Login | PMO Project Management Office{% endblock %}
 
 {% block content %}
-<section class="auth-container">
-    <article class="glass-card auth-card">
-        <h2 class="section-title text-center">Acesso ao Sistema</h2>
-        <p class="section-subtitle text-center mb-4">Painel profissional para gestão do PMO</p>
+<section class="auth-shell">
+    <article class="auth-panel">
+        <div class="auth-aside">
+            <p class="auth-kicker">PMO Digital</p>
+            <h2 class="auth-title">Gestão estratégica com visão executiva</h2>
+            <p class="auth-copy">
+                Centralize prioridades, acompanhe criticidade e acelere decisões com um painel profissional de portfólio.
+            </p>
+            <div class="auth-points">
+                <span>Monitoramento em tempo real</span>
+                <span>Indicadores de risco e progresso</span>
+                <span>Análise inteligente para priorização</span>
+            </div>
+        </div>
 
-        <form method="POST">
-            <div class="mb-3">
-                <input class="form-control" type="email" name="email" placeholder="E-mail corporativo" required>
-            </div>
-            <div class="mb-3">
-                <input class="form-control" type="password" name="senha" placeholder="Senha" required>
-            </div>
-            <button class="btn btn-primary w-100">Entrar</button>
-        </form>
+        <div class="glass-card auth-card">
+            <h3 class="section-title text-center">Acesso ao Sistema</h3>
+            <p class="section-subtitle text-center mb-4">Entre com suas credenciais corporativas</p>
+
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label">E-mail</label>
+                    <input class="form-control" type="email" name="email" placeholder="seu.email@organizacao.mil.br" required>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Senha</label>
+                    <input class="form-control" type="password" name="senha" placeholder="Digite sua senha" required>
+                </div>
+                <button class="btn btn-primary w-100">Entrar no painel</button>
+            </form>
+
+            <p class="auth-footnote">Acesso restrito a usuários autorizados.</p>
+        </div>
     </article>
 </section>
 {% endblock %}
