@@ -1,0 +1,9 @@
+{
+  "name": "pmo_app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Configuracao npm para testes do projeto PMO App",
+  "scripts": {
+    "test": "python -m compileall -q . && python -m unittest discover -s tests -p \"test_*.py\""
+  }
+}
